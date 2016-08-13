@@ -185,39 +185,42 @@ class TrainsCollection(object):
                 #               其他: OT[]
                 # -------------------------------------------------
                 price_dict = self._get_price(row)   #  获取票价数据
+                try:
+                    ot_str = self.replace_and_append('\n'.join(price_dict.get('OT')), '')
+                except TypeError:
+                    ot_str = ''
                 price = [          # 票价列表
-                         colored.yellow('票价'),
-                         '',
-                         '',
-                         '',
-                         # 由于从服务器获取到的字符从中第一个字符是'￥',这个字符
-                         # 在GB2312编码中是无法编码的,在处理过程中会报错,因此需要
-                         # 将第一个字符替换掉,在此用空字符替换,表示删除第一个字符,
-                         # 然后追加 '元' 字符串,表示人民币
-                         #  商务
-                         self.replace_and_append(price_dict.get('A9', '')),
-                         #  特等
-                         self.replace_and_append(price_dict.get('P', '')),
-                         #  一等
-                         self.replace_and_append(price_dict.get('M', '')),
-                         # 二等
-                         self.replace_and_append(price_dict.get('O', '')),
-                         # 高级软卧
-                         self.replace_and_append(price_dict.get('A6', '')),
-                         # 软卧
-                         self.replace_and_append(price_dict.get('A4', '')),
-                         # 硬卧
-                         self.replace_and_append(price_dict.get('A3', '')),
-                         # 软座
-                         self.replace_and_append(price_dict.get('A2', '')),
-                         # 硬座
-                         self.replace_and_append(price_dict.get('A1')),
-                         # 无座
-                         self.replace_and_append(price_dict.get('WZ', '')),
-                         # 其他
-                         self.replace_and_append('\n'.join(price_dict.get('OT')))
+                    colored.yellow('票价'),
+                    '',
+                    '',
+                    '',
+                    # 由于从服务器获取到的字符从中第一个字符是'￥',这个字符
+                    # 在GB2312编码中是无法编码的,在处理过程中会报错,因此需要
+                    # 将第一个字符替换掉,在此用空字符替换,表示删除第一个字符,
+                    # 然后追加 '元' 字符串,表示人民币
+                    #  商务
+                    self.replace_and_append(price_dict.get('A9', '')),
+                    #  特等
+                    self.replace_and_append(price_dict.get('P', '')),
+                    #  一等
+                    self.replace_and_append(price_dict.get('M', '')),
+                    # 二等
+                    self.replace_and_append(price_dict.get('O', '')),
+                    # 高级软卧
+                    self.replace_and_append(price_dict.get('A6', '')),
+                    # 软卧
+                    self.replace_and_append(price_dict.get('A4', '')),
+                    # 硬卧
+                    self.replace_and_append(price_dict.get('A3', '')),
+                    # 软座
+                    self.replace_and_append(price_dict.get('A2', '')),
+                    # 硬座
+                    self.replace_and_append(price_dict.get('A1')),
+                    # 无座
+                    self.replace_and_append(price_dict.get('WZ', '')),
+                    # 其他
+                    ot_str
                 ]
-
                 data_list = [train, price]
                 yield data_list                # 返回车票信息和票价信息
 
