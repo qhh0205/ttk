@@ -43,8 +43,7 @@
     条命令下去,全部成绩一览无余.
 ***
 ####关于本工具:
-######本程序参考自:
-  [https://github.com/protream/iquery](https://github.com/protream/iquery)
+######本程序参考自:[https://github.com/protream/iquery](https://github.com/protream/iquery)
 	在此基础上做了一些改进:
                1.从py3.x改成了py2.x
                2.*可以支持票价查询*
