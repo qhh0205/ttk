@@ -114,10 +114,16 @@ class TrainsCollection(object):
         :return: ·µ»ØÌæ»»ºóµÄ×Ö·û´®
         '''
 
-        result = re.sub('^.', c, s)
-        if result:
-            result = result + a
-        return colored.yellow(result)
+        try:
+            result = ''
+            if s:
+                result = re.sub('^.', c, s)
+                result = result + a
+            return colored.yellow(result)
+        except TypeError:
+            pass
+        except:
+            pass
 
     @property
     def trains(self):
