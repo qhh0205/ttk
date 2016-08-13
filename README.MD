@@ -44,7 +44,7 @@
 ***
 ####关于本工具:
     本程序参考自:
-  [https://github.com/protream/iquery](https://github.com/protream/iquery)<br />
+                [https://github.com/protream/iquery](https://github.com/protream/iquery)<br />
 	在此基础上做了一些改进:
                1.从py3.x改成了py2.x
                2.*可以支持票价查询*
@@ -58,7 +58,7 @@
     因此可以在windows下正常运行.如果用utf-8标准,在windows除非标准输出也是utf-8,
     否则输出的是一堆乱码.考虑到windows下编码大多是GB2312标准,所以整个工程采
     用GB2312编码.
-
+    
     声明:任何人都可以获得此代码,在此基础上任意修改,任意重新发布.如果因
     为使用本工具造成任何损失,本人概不负责!
 ***
