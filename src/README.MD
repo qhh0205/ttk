@@ -24,9 +24,9 @@
         入20160111,这样解析出来就是2016-1-11,其他歧义类似处理.
 ***
 ####显示效果:
-**Windows10:**
+**------>Windows10:**
 ![image](https://github.com/qianghaohao/ttk/raw/master/image/result.png)
-**Windows7:**
+**------>Windows7:**
 ![image](https://github.com/qianghaohao/ttk/raw/master/image/ttk_win7.png)
 ***
 ####关于安装:
