@@ -5,6 +5,7 @@ The program entrance.
 """
 import requests
 from utils import args, exit_after_echo
+
 def show_usage():
     """Usage:
     ttk [-dgktz] <from> <to> <date>

@@ -23,8 +23,11 @@
         解析成2016-11-01,而不是2016-01-11.要输入2016-1-11请输
         入20160111,这样解析出来就是2016-1-11,其他歧义类似处理.
 ***
-####图文说明:
+####显示效果:
+**Windows10:**
 ![image](https://github.com/qianghaohao/ttk/raw/master/image/result.png)
+**Windows7:**
+![image](https://github.com/qianghaohao/ttk/raw/master/image/ttk_win7.png)
 ***
 ####关于安装:
     本工具已经用pyinstaller工具打包成exe格式,无需专门安装,可以
@@ -47,8 +50,8 @@
 	在此基础上做了一些改进:
                1.从py3.x改成了py2.x
                2.*可以支持票价查询*
-               3.windows下支持简体中文
-	           4.程序中编码统一为GB2312
+	       3.使用colorama模块在终端显示彩色字符,可以很好地兼容windows
+               4.程序中编码统一为GB2312,很好地支持中文
     通过python的requests模块向12306发送https请求,需要注意的是请求时一定要
     忽略ssl认证--设置get请求参数的verify参数为False,要不然请求会失败,然后
     将服务器响应的json数据解析出来得到结果,通过prettytable模块以表格的形式

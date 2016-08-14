@@ -5,9 +5,12 @@ A simple args parser and a color wrapper.
 """
 import sys
 import random
+import warnings
+warnings.filterwarnings("ignore")
 import requests
 from requests.exceptions import ConnectionError, Timeout
-
+from colorama import init, Fore, Back, Style
+init(autoreset=True)
 
 __all__ = ['args', 'colored', 'requests_get', 'exit_after_echo']
 
@@ -105,51 +108,49 @@ class Args(object):
         return self._args
 
 
+#  使用跨平台的colorama包控制终端输出字符的颜色,如果直接用原始的
+# 转义字符序列打印彩色字体在windows下存在兼容问题,有的版本无法显
+# 示
 class Colored(object):
-    # 显示格式: \033[显示方式;前景色;背景色m
-    # 只写一个字段表示前景色,背景色默认
-    RED = '\033[91m'      # 红色
-    GREEN = '\033[92m'    # 绿色
-    YELLOW = '\033[93m'   # 黄色
-    BLUE = '\033[34m'     # 蓝色
-    FUCHSIA = '\033[1;35;40m'  # 紫红色
-    CYAN = '\033[36m'     # 青蓝色
-    WHITE = '\033[37m'    # 白色
-    NOTESTR = '\033[5;37;46m'  # 提示字符串
-    #: no color
-    RESET = '\033[0m'  # 终端默认颜色
 
-    def color_str(self, color, s):
-        return '{}{}{}'.format(
-            getattr(self, color),
-            s,
-            self.RESET
-        )
-
+    #  前景色:红色  背景色:默认
     def red(self, s):
-        return self.color_str('RED', s)
+        return Fore.RED + s + Fore.RESET
 
+    #  前景色:绿色  背景色:默认
     def green(self, s):
-        return self.color_str('GREEN', s)
+        return Fore.GREEN + s + Fore.RESET
 
+    #  前景色:黄色  背景色:默认
     def yellow(self, s):
-        return self.color_str('YELLOW', s)
+        return Fore.YELLOW + s + Fore.RESET
 
+    #  前景色:蓝色  背景色:默认
     def blue(self, s):
-        return self.color_str('BLUE', s)
+        return Fore.BLUE + s + Fore.RESET
 
-    def fuchsia(self, s):
-        return self.color_str('FUCHSIA', s)
+    #  前景色:洋红色  背景色:默认
+    def magenta(self, s):
+        return Fore.MAGENTA + s + Fore.RESET
 
+    #  前景色:青色  背景色:默认
     def cyan(self, s):
-        return self.color_str('CYAN', s)
+        return Fore.CYAN + s + Fore.RESET
 
+    #  前景色:白色  背景色:默认
     def white(self, s):
-        return self.color_str('WHITE', s)
+        return Fore.WHITE + s + Fore.RESET
 
-    def note_str(self, s):
-        return self.color_str('NOTESTR', s)
+    #  前景色:黑色  背景色:默认
+    def black(self, s):
+        return Fore.BLACK
+
+    #  前景色:白色  背景色:绿色
+    def white_green(self, s):
+        return Fore.WHITE + Back.GREEN + s + Fore.RESET + Back.RESET
+
 
 args = Args()
 colored = Colored()
+
 

@@ -10,6 +10,8 @@ from:
 import os
 import re
 import sys
+import warnings
+warnings.filterwarnings("ignore")
 reload(sys)
 sys.setdefaultencoding('GB2312')
 import datetime
@@ -17,6 +19,10 @@ from collections import OrderedDict
 from prettytable import PrettyTable
 from utils import colored, requests_get, exit_after_echo
 from Q2B_and_B2Q import *
+
+
+from colorama import init, Fore, Back, Style
+init(autoreset=True)
 
 __all__ = ['query']
 
@@ -91,12 +97,15 @@ class TrainsCollection(object):
     def _get_price(self, row):       # 获取每列车不同席别的票价,返回一个列表
         params = self._build_params(row)
         r = requests_get(PRICE_QUERY_URL, params=params, verify=False)
+        rows = {}
         try:
             rows = r.json()['data']  # 得到json查询结果
         except KeyError:
             rows = {}
         except TypeError:
-            exit_after_echo(NO_RESPONSE)
+            pass
+        except ValueError:
+            rows = {}
         return rows
 
     def replace_and_append(self, s, c='', a='元'):
@@ -186,7 +195,7 @@ class TrainsCollection(object):
                 # -------------------------------------------------
                 price_dict = self._get_price(row)   #  获取票价数据
                 try:
-                    ot_str = self.replace_and_append('\n'.join(price_dict.get('OT')), '')
+                    ot_str = self.replace_and_append('\n'.join(price_dict.get('OT', '')))
                 except TypeError:
                     ot_str = ''
                 price = [          # 票价列表
@@ -246,7 +255,7 @@ class TrainsCollection(object):
 
     def note_str(self, note_str):
         temp_str = '%-139s' % note_str
-        print colored.note_str(temp_str)
+        print colored.white_green(temp_str)
 
     def pretty_print(self):
         """Use `PrettyTable` to perform formatted outprint."""
@@ -373,13 +382,15 @@ class TrainTicketsQuery(object):
         params = self._build_params()
 
         r = requests_get(QUERY_URL, params=params, verify=False)
-
+        rows = []
         try:
             rows = r.json()['data']['datas']   # 得到json查询结果
         except KeyError:
             rows = []
         except TypeError:
             exit_after_echo(NO_RESPONSE)
+        except ValueError:
+            rows = []
         query_date = self._valid_date
         return TrainsCollection(rows, self.opts, query_date, self.from_station, self.to_station)
 
